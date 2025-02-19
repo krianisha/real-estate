@@ -1,91 +1,90 @@
-import axios from 'axios'
-import dayjs from 'dayjs'
-import {toast} from 'react-toastify'
-
+import axios from "axios";
+import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 export const api = axios.create({
-   //baseURL: "https://homyz-real-estate-blush.vercel.app/api",
-  baseURL: "http://localhost:8000/api",
+  //baseURL: "https://homyz-real-estate-blush.vercel.app/api",
+  baseURL:
+    "https://real-estate-m90p09w4d-anishas-projects-194b03e1.vercel.app/api",
 });
 
-
 export const getAllProperties = async () => {
-    try {
-      const response = await api.get("/residency/allresd", {
-        timeout: 10 * 1000,
-      });
-  
-      if (response.status === 400 || response.status === 500) {
-        throw response.data;
-      }
-      return response.data;
-    } catch (error) {
-      toast.error("Something went wrong");
-      throw error;
-    }
-  };
+  try {
+    const response = await api.get("/residency/allresd", {
+      timeout: 10 * 1000,
+    });
 
-
-  export const getProperty = async (id) => {
-    try {
-      const response = await api.get(`/residency/${id}`, {
-        timeout: 10 * 1000,
-      });
-  
-      if (response.status === 400 || response.status === 500) {
-        throw response.data;
-      }
-      return response.data;
-    } catch (error) {
-      toast.error("Something went wrong");
-      throw error;
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
     }
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong");
+    throw error;
   }
+};
 
-  export const createUser = async (email,token) => {
-    try{
-      await api.post(`/user/register`, {email}, {
+export const getProperty = async (id) => {
+  try {
+    const response = await api.get(`/residency/${id}`, {
+      timeout: 10 * 1000,
+    });
+
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
+    }
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong");
+    throw error;
+  }
+};
+
+export const createUser = async (email, token) => {
+  try {
+    await api.post(
+      `/user/register`,
+      { email },
+      {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-    }catch(error){
-      toast.error("Something went wrong, Please try again")
-      throw error
-    }
-  }
-
-
-  export const bookVisit = async (date, propertyId, email, token) => {
-    try {
-      if (!token) {
-        toast.error("You need to be logged in.");
-        return;
-      }
-  
-      await api.post(
-        `/user/bookVisit/${propertyId}`,
-        {
-          email,
-          id: propertyId,
-          date: dayjs(date).format("DD/MM/YYYY"),
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("Visit booked successfully!");
-    } catch (error) {
-      toast.error("Something went wrong, Please try again");
-      throw error;
+      }
+    );
+  } catch (error) {
+    toast.error("Something went wrong, Please try again");
+    throw error;
+  }
+};
+
+export const bookVisit = async (date, propertyId, email, token) => {
+  try {
+    if (!token) {
+      toast.error("You need to be logged in.");
+      return;
     }
-  };
-  
 
+    await api.post(
+      `/user/bookVisit/${propertyId}`,
+      {
+        email,
+        id: propertyId,
+        date: dayjs(date).format("DD/MM/YYYY"),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success("Visit booked successfully!");
+  } catch (error) {
+    toast.error("Something went wrong, Please try again");
+    throw error;
+  }
+};
 
-export const removeBooking = async(id, email, token) => {
+export const removeBooking = async (id, email, token) => {
   try {
     await api.post(
       `/user/removeBooking/${id}`,
@@ -94,14 +93,14 @@ export const removeBooking = async(id, email, token) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
-    )
+    );
   } catch (error) {
-    toast.error("Something went wrong, Please try again")
+    toast.error("Something went wrong, Please try again");
   }
-}
+};
 
 export const toFav = async (id, email, token) => {
   try {
@@ -122,7 +121,7 @@ export const toFav = async (id, email, token) => {
 };
 
 export const getAllFav = async (email, token) => {
-  if(!token) return
+  if (!token) return;
   try {
     const res = await api.post(
       `/user/allFav`,
@@ -131,19 +130,19 @@ export const getAllFav = async (email, token) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       }
-    )
-    return res.data["favResidenciesID"]
+    );
+    return res.data["favResidenciesID"];
   } catch (error) {
-    toast.error("Something went wrong while fetching favs")
-    throw error
+    toast.error("Something went wrong while fetching favs");
+    throw error;
   }
-}
+};
 
 export const getAllBookings = async (email, token) => {
-  if(!token) return
+  if (!token) return;
   try {
     const res = await api.post(
       `/user/allBookings`,
@@ -152,16 +151,16 @@ export const getAllBookings = async (email, token) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       }
-    )
-    return res.data["bookedVisits"]
+    );
+    return res.data["bookedVisits"];
   } catch (error) {
-    toast.error("Something went wrong while fetching favs")
-    throw error
+    toast.error("Something went wrong while fetching favs");
+    throw error;
   }
-}
+};
 
 export const createResidency = async (data, token) => {
   console.log("Sending data:", data);
@@ -180,5 +179,3 @@ export const createResidency = async (data, token) => {
     throw error;
   }
 };
-
-
