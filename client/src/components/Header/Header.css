@@ -1,55 +1,41 @@
 .h-wrapper {
-    color: white;
     z-index: 99;
-}
-
-.h-container {
-    justify-content: space-between;
+    position: sticky;
+    top: 0;
+  }
+  .h-container {
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: var(--secondary);
-}
-
-.h-menu {
+    justify-content: space-between;
+  }
+  
+  .h-menu {
     gap: 2rem;
-}
-
-.h-menu > *:hover {
+  }
+  .h-menu > *:hover {
     cursor: pointer;
-}
-
-/* Add pointer cursor to Add Property button specifically */
-.h-menu > div:hover {
-    cursor: pointer;
-}
-
-.menu-icon {
+  }
+  .menu-icon {
     display: none;
-}
-
-.avatar-rounded {
-    border-radius: 50%;
-}
-
-@media (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
     .menu-icon {
-        display: block;
+      display: block;
     }
-
     .h-menu {
-        z-index: 99;
-        color: var(--black);
-        position: absolute;
-        top: 3rem;
-        right: 4rem;
-        background: white;
-        flex-direction: column;
-        font-weight: 500;
-        gap: 2rem;
-        padding: 3rem;
-        border-radius: 10px;
-        align-items: flex-start;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-        transition: all 300ms ease-in;
-    }
-}
+      color: var(--black);
+      position: absolute;
+      gap: 2rem;
+      font-weight: 500;
+      flex-direction: column;
+      right: 4rem;
+      top: 3rem;
+      background: white;
+      display: flex;
+      border-radius: 10px;
+      transition: all 200ms ease;
+      align-items: flex-start;
+      padding: 3rem;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);}}
