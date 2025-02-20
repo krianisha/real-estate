@@ -28,7 +28,7 @@ export const Hero = () => {
                         <span className='secondaryText'>Forget all difficulties in finding a residence for you</span>
                     </div>
 
-                   <SearchBar></SearchBar>
+                 
 
                     <div className="flexCenter stats">
                         <div className="flexColCenter stat">
